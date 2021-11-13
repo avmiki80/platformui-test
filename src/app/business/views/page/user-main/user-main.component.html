@@ -1,0 +1,55 @@
+<!--Без этой штуки, style="height: 100vh, sidebar не работает"-->
+<ng-sidebar-container *ngIf="!isLoading" style="height: 100vh"> <!--контейнер для внедрения слайд-меню -->
+  <!--  слайд-меню-->
+  <ng-sidebar
+    [opened]="menuOpened"
+    [closeOnClickOutside]="false"
+    [closeOnClickBackdrop]="true"
+    [showBackdrop]="showBackdrop"
+    [mode]="menuMode"
+    [animate]="true"
+    [position]="menuPosition"
+    [autoFocus]="false"
+  >
+    <div class="sidebar"
+    >
+      <app-user-menu
+      [applicationList]="platformAppSet"
+      (menuShow)="toggleMenu()"
+      (selectApp)="onSelectApp($event)"
+      >
+
+      </app-user-menu>
+    </div>
+  </ng-sidebar>
+  <!--  основной контент-->
+  <!--  ng-sidebar-content - над чем будет открываться слайд-меню-->
+  <div ng-sidebar-content>
+    <div class="main-panel wrapper" [ngClass]="{'mobile-background': isMobile}">
+      <!--    навигация с шапкой и списком категорий-->
+      <nav class="navbar navbar-transparent navbar-absolute fixed-top navbar-expand"
+           [ngClass]="{'mobile-action-bar': isMobile}">
+        <!--     шапка с меню -->
+        <app-header
+          [user]="user"
+          (toggleMenu)="toggleMenu()"
+        >
+
+        </app-header>
+      </nav>
+      <div class="content">
+        <div class="container-fluid nopadding">
+          <!-- статистика -->
+<!--          <p>stat</p>-->
+          <app-user-app
+            [user]="user"
+          ></app-user-app>
+        </div>
+      </div>
+      <!--    нижняя часть страницы (футер, подвал) -->
+      <div *ngIf="!isMobile">
+        <app-footer></app-footer>
+      </div>
+    </div>
+  </div>
+</ng-sidebar-container>

@@ -1,0 +1,13 @@
+
+{
+  "/api/*": {
+    "target": "https://testbazis.avi.motor.loc:8443/platform-1.0.1",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "withCredentials": true,
+    "pathRewrite": {
+      "^/api/": ""
+    }
+  }
+}

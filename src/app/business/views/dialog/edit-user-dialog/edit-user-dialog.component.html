@@ -1,0 +1,229 @@
+<mat-dialog-content [formGroup]="form" [appMustMatch]="['password', 'confirmPassword']">
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <div class="row">
+    <div class="col-lg-4">
+      <mat-form-field>
+        <mat-label>{{'USER.NAME' | translate}}</mat-label>
+        <div class="error" *ngIf="getUsernameField.errors">
+          <p *ngIf="getUsernameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+        </div>
+        <input
+          #inputTitle
+          matInput maxlength="25" required
+          formControlName="username"
+          id="username"
+          type="text"
+        />
+        <button
+          *ngIf="getUsernameField.value.trim().length > 0"
+          class="clear-icon"
+          mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="getUsernameField.setValue('')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'USER.EMAIL' | translate}}</mat-label>
+        <div class="error" *ngIf="getEmailField.errors">
+          <p *ngIf="getEmailField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+          <p *ngIf="getEmailField.errors.email" class="error">Неверный email</p>
+        </div>
+        <input
+          #inputEmail
+          id="email"
+          type="email"
+          formControlName="email"
+          matInput required
+          placeholder="anyname@avid.ru"
+          [ngClass]="{ 'field-error': getEmailField.errors }"
+        />
+        <button
+          *ngIf="getEmailField.value.trim().length > 0"
+          class="clear-icon"
+          mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="getEmailField.setValue('')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+        <mat-error *ngIf="getEmailField.errors">
+          <p *ngIf="getEmailField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+          <p *ngIf="getEmailField.errors.email" class="error">Неверный email</p>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'COMMON.PASSWORD' | translate}}</mat-label>
+        <input
+          id="password"
+          type="password"
+          #inputPassword
+          formControlName="password"
+          matInput
+        />
+        <button
+          *ngIf="getPasswordField.value.trim().length > 0"
+          class="clear-icon"
+          mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="getPasswordField.setValue('')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'COMMON.CONFIRM-PASSWORD' | translate}}</mat-label>
+        <div class="error" *ngIf="getConfirmPasswordField.errors">
+          <p *ngIf="getConfirmPasswordField.errors.mustMatch" class="error">Пароли не совпадают</p>
+        </div>
+        <input
+          id="confirmPassword"
+          type="password"
+          #inputConfirmPassword
+          formControlName="confirmPassword"
+          matInput
+        />
+        <button
+          *ngIf="getConfirmPasswordField.value.trim().length > 0"
+          class="clear-icon"
+          mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="getConfirmPasswordField.setValue('')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+      <mat-form-field>
+        <mat-label>{{'USER.LASTNAME' | translate}}</mat-label>
+        <div class="error" *ngIf="getLastNameField.errors">
+          <p *ngIf="getLastNameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+        </div>
+        <input
+          id="lastName"
+          type="text"
+          #inputLastName
+          formControlName="lastName"
+          matInput required
+          placeholder="{{'USER.LASTNAME' | translate}}"
+        />
+        <button
+          *ngIf="getLastNameField.value.trim().length > 0"
+          class="clear-icon"
+          mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="getLastNameField.setValue('')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+        <mat-error *ngIf="getLastNameField.errors">
+          <p *ngIf="getLastNameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{'USER.FIRSTNAME' | translate}}</mat-label>
+        <div class="error" *ngIf="getFirstNameField.errors">
+          <p *ngIf="getFirstNameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+        </div>
+        <input
+          #inputFirstName
+          matInput maxlength="25" required
+          formControlName="firstName"
+          id="firstName"
+          type="text"
+          placeholder="{{'USER.FIRSTNAME' | translate}}"
+        />
+        <button
+          *ngIf="getFirstNameField.value.trim().length > 0"
+          class="clear-icon"
+          mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="getFirstNameField.setValue('')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'USER.PATRONYMICNAME' | translate}}</mat-label>
+        <div class="error" *ngIf="getPatronymicNameField.errors">
+          <p *ngIf="getPatronymicNameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+        </div>
+        <input
+          #inputPatronymicName
+          id="patronymicName"
+          type="text"
+          formControlName="patronymicName"
+          matInput required
+          placeholder="{{'USER.PATRONYMICNAME' | translate}}"
+          [ngClass]="{ 'field-error': getPatronymicNameField.errors }"
+        />
+        <button
+          *ngIf="getPatronymicNameField.value.trim().length > 0"
+          class="clear-icon"
+          mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="getPatronymicNameField.setValue('')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+        <mat-error *ngIf="getPatronymicNameField.errors">
+          <p *ngIf="getPatronymicNameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+        </mat-error>
+      </mat-form-field>
+      <div class="row">
+        <mat-form-field class="col-8">
+          <mat-label>{{'UNIT.UNIT' | translate}}</mat-label>
+          <div class="error" *ngIf="getUnitField.errors">
+            <p *ngIf="getUnitField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+          </div>
+          <input
+            id="unit"
+            type="text"
+            readonly
+            formControlName="unit"
+            matInput required
+            placeholder="{{'UNIT.UNIT' | translate}}"
+            [ngClass]="{ 'field-error': getUnitField.errors }"
+          />
+          <button
+            *ngIf="getUnitField.value.trim().length > 0"
+            class="clear-icon"
+            mat-button matSuffix mat-icon-button aria-label="Clear"
+            (click)="onSetUnit()"
+          >
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+        <!--  </div>-->
+        <div class="col-2 align-self-start">
+          <button
+            mat-raised-button
+            (click)="onSetUnit()"
+            class="add-btn red"
+          >{{'UNIT.SET-UNIT' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <app-simple-list-role-view
+        [onlyView]=false
+        [roleSet]="roleSet"
+        (addRole)="onClickAddRole($event)"
+        (deleteRole)="onClickDeleteRole($event)"
+      >
+      </app-simple-list-role-view>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center nopadding">
+    <button
+      mat-raised-button color="primary"
+      [disabled]="getConfirmPasswordField.errors || getEmailField.errors || getUsernameField.errors"
+      (click)="onConfirm()"
+    >{{'COMMON.SAVE' | translate}}
+    </button>
+    <button
+      mat-raised-button
+      (click)="onCancel()"
+    >{{'COMMON.CANCEL' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>

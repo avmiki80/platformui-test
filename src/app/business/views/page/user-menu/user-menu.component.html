@@ -1,0 +1,34 @@
+<div id="menu-items">
+  <div class="logo">
+    <div class="container">
+      <div class="row">
+        <div class="col-2">
+          <button mat-icon-button (click)="onShowLeftMenu()">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sidebar-wrapper">
+    <div>
+      <p class="title">{{'APP.APPLICATIONS' | translate}}</p>
+    </div>
+
+    <ul class="nav">
+      <!--            список menuItems-->
+      <li
+        *ngFor="let app of applicationList, let index = index"
+        class="nav-item item"
+        [class.active-link]="selectedApp === app"
+        (click)="onSelectApp(app)"
+      >
+        <a class="nav-link" (click)="onSelectApp(app)" href="{{app.appURL}}" target="_blank">
+          <!--          название item-->
+          <span class="item-title">{{app.name}}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="sidebar-background" *ngIf="!isMobile"></div>
+</div>

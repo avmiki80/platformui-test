@@ -1,0 +1,28 @@
+<div *ngIf="isShow">
+  <div class="row">
+    <app-list-role-view
+      [itemList]="platformRoleSet"
+      [onlyView]=false
+      [totalRolesFounded]="totalRolesFounded"
+      [roleSearchValues]="roleSearchValues"
+      [selectedRole]="selectRole"
+      (selectRole)="onSelectPlatformRole($event)"
+      (addRole)="onAddPlatformRole($event)"
+      (editRole)="onEditPlatformRole($event)"
+      (deleteRole)="onDeletePlatformRole($event)"
+      (filter)="searchPlatformRole($event)"
+      (pagingEvent)="pagingRole($event)"
+      class="col-7"
+    >
+    </app-list-role-view>
+    <app-list-user-view
+      class="col-5"
+      [onlyView]=true
+      [itemList]="userList"
+      [totalUsersFounded]="totalUsersFounded"
+      [userSearchValues]="usersByRoleSearchValues"
+      (pagingEvent)="pagingUser($event)"
+    >
+    </app-list-user-view>
+  </div>
+</div>

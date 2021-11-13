@@ -1,0 +1,37 @@
+<mat-card [ngClass]="{'pos': !onlyView}">
+  <mat-card-header>
+    <mat-card-title *ngIf="onlyView">
+      {{'USER.INFO' | translate}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row add-role-field" *ngIf="!onlyView">
+      <button mat-icon-button (click)="onClickAddRole()" class="add-icon col-1 add-btn">
+        <mat-icon aria-hidden="false">add</mat-icon>
+      </button>
+      <span class="col-6 align-self-center" (click)="onClickAddRole()">{{'ROLE.ADD' | translate}}</span>
+    </div>
+    <div class="row add-role-field" *ngIf="onlyView">
+      <span class="col-5 align-self-center role-header">{{'ROLE.ROLES' | translate}}</span>
+      <span class="col-5 align-self-center">{{'APP.APPLICATIONS' | translate}}</span>
+    </div>
+    <mat-selection-list [multiple]="false" *ngIf="roleSet" class="roles">
+      <mat-list-option *ngFor="let role of roleSet" [value]="role">
+        <div class="row">
+            <span class="col-5 item-role align-self-center">
+              {{role.name}}
+            </span>
+          <span class="col-5 item-role align-self-center">
+              {{role.application.name}}
+            </span>
+          <span class="col-2" *ngIf="!onlyView">
+              <button mat-icon-button (click)="onClickDeleteRole(role)" class="delete-icon">
+                <mat-icon aria-hidden="false">delete</mat-icon>
+              </button>
+            </span>
+        </div>
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card-content>
+</mat-card>
+

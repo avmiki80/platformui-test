@@ -1,0 +1,26 @@
+<div *ngIf="isShow">
+  <div class="row">
+    <app-list-app-view
+      [itemList]="platformAppSet"
+      [totalAppsFounded]="totalAppsFounded"
+      [appSearchValues]="appSearchValues"
+      [selectedPlatformApp]="selectPlatformApp"
+      (selectPlatformApp)="onSelectPlatformApp($event)"
+      (addPlatformApp)="onAddPlatformApp($event)"
+      (editPlatformApp)="onEditPlatformApp($event)"
+      (deletePlatformApp)="onDeletePlatformApp($event)"
+      (filterByName)="searchPlatformApp($event)"
+      (pagingEvent)="paging($event)"
+      class="col-7"
+    >
+    </app-list-app-view>
+    <app-list-role-view
+      [onlyView]=true
+      [itemList]="roleSet"
+      [totalRolesFounded]="totalRolesFromSelectedApp"
+      [roleSearchValues]="roleSearchValues"
+      class="col-5"
+    >
+    </app-list-role-view>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.item-role {
+  font-size: 12px;
+}
+.roles{
+  overflow-y: auto;
+  height: 207px;
+}
+.add-btn {
+  color: #88bb00;
+  margin: 0 0 0 30px;
+}
+.add-role-field {
+  text-decoration: underline;
+}
+.role-header{
+  padding-left: 44px;
+}
+.pos{
+  margin-top: -70px;
+}

@@ -1,0 +1,104 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title *ngIf="onlyView">
+      {{'ROLE.INFO' | translate}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row justify-content-between" *ngIf="!onlyView">
+      <div class="col-3" *ngIf="!wildUsersView">
+        <button mat-raised-button color="primary" (click)="onClickAddItem()"
+        >{{'USER.ADD' | translate}}</button>
+      </div>
+      <div class="col-3" *ngIf="wildUsersView">
+        <button mat-raised-button color="primary" (click)="onClickRefreshItem()">
+          {{'USER.REFRESH' | translate}}
+        </button>
+      </div>
+      <div class="col-4" *ngIf="!wildUsersView">
+        <mat-form-field class="my-input">
+          <mat-label>{{'USER.SEARCH' | translate}}</mat-label>
+          <input matInput
+                 type="text"
+                 autocomplete="off"
+                 placeholder="{{'USER.ENTER-NAME' | translate}}"
+                 #filterInputName
+                 [(ngModel)]="searchName"
+                 (keydown.escape)="searchName = ''; onFilter(null)"
+                 (keyup)="onFilter(null)">
+          <button *ngIf="filterInputName.value.trim().length > 0"
+                  class="clear-icon"
+                  mat-button matSuffix mat-icon-button aria-label="Сlear"
+                  (click)="searchName = ''; onFilter(null)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div *ngIf="userSearchValues && itemList && itemList.length > 0"
+         class="card-body table-responsive row" >
+      <table class="table table-hover" mat-table matSort [dataSource]="dataSource">
+
+        <ng-container matColumnDef="username">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-name"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(name)"
+          >{{'USER.NAME' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-name pointer"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="selectedUser === item"
+          >{{item.username}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-email"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(email)"
+          >{{'USER.EMAIL' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-email pointer"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="selectedUser === item"
+          >{{item.email}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="operation" *ngIf="!onlyView">
+          <th class="my-table-header-cell-color my-table-cell-operations"
+              mat-header-cell *matHeaderCellDef ></th>
+          <td class="my-table-cell-operations"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="selectedUser === item">
+            <button class="edit-icon"
+                    mat-icon-button
+                    (click)="onClickEditItem(item)">
+              <mat-icon aria-hidden="false">edit</mat-icon>
+            </button>
+            <button class="delete-icon"
+                    mat-icon-button
+                    (click)="onClickDeleteItem(item)">
+              <mat-icon aria-hidden="false">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row, columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator
+        (page)="pageChanged($event)"
+        [pageIndex]="userSearchValues.pageNumber"
+        [pageSize]="userSearchValues.pageSize"
+        [length]="totalUsersFounded"
+        [pageSizeOptions]="[5, 10]"
+        showFirstLastButtons></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+

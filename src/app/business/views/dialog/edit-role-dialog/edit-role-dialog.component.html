@@ -1,0 +1,120 @@
+<mat-dialog-content [formGroup]="form">
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <div class="row">
+    <div class="col-9">
+      <mat-form-field>
+        <mat-label>{{'ROLE.NAME' | translate}}</mat-label>
+        <div class="error" *ngIf="getRoleNameField.errors">
+          <p *ngIf="getRoleNameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+        </div>
+        <input
+          matInput maxlength="255" required
+          formControlName="roleName"
+          id="roleName"
+          type="text"
+          placeholder="{{'ROLE.NAME' | translate}}"
+          [ngClass]="{ 'field-error': getRoleNameField.errors }"
+        />
+        <button
+          *ngIf="getRoleNameField.value.trim().length > 0"
+          class="clear-icon"
+          mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="getRoleNameField.setValue('')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'ROLE.FOR-USER' | translate}}</mat-label>
+        <div class="error" *ngIf="getRoleViewNameField && getRoleViewNameField.errors">
+          <p *ngIf="getRoleViewNameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+        </div>
+        <input
+          matInput maxlength="255" required
+          formControlName="roleViewName"
+          id="roleViewName"
+          type="text"
+          placeholder="{{'ROLE.FOR-USER' | translate}}"
+          [ngClass]="{ 'field-error': getRoleViewNameField.errors }"
+        />
+        <button
+          *ngIf="getRoleViewNameField.value.trim().length > 0"
+          class="clear-icon"
+          mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="getRoleViewNameField.setValue('')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'COMMON.DESCRIPTION' | translate}}</mat-label>
+        <input
+          id="roleDescription"
+          type="text"
+          matInput
+          formControlName="roleDescription"
+          placeholder="{{'COMMON.DESCRIPTION' | translate}}"
+        />
+        <button
+          *ngIf="getRoleDescriptionField && getRoleDescriptionField.value.trim().length > 0"
+          class="clear-icon"
+          mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="getRoleDescriptionField.setValue('')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'APP.NAME' | translate}}</mat-label>
+        <div class="error" *ngIf="getPlatformAppField.errors">
+          <p *ngIf="getPlatformAppField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+        </div>
+        <input
+          id="platformApp"
+          type="text"
+          readonly
+          formControlName="platformApp"
+          matInput required
+          placeholder="{{'APP.NAME' | translate}}"
+          [ngClass]="{ 'field-error': getPlatformAppField.errors }"
+        />
+        <button
+          *ngIf="getPlatformAppField.value.trim().length > 0"
+          class="clear-icon"
+          mat-button matSuffix mat-icon-button aria-label="Clear"
+          (click)="getPlatformAppField.setValue('')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+        <mat-error *ngIf="getPlatformAppField.errors">
+          <p *ngIf="getPlatformAppField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-3 align-self-end">
+      <button
+        mat-raised-button
+        (click)="onSetApp()"
+        class="add-btn red"
+      >{{'APP.SET' | translate}}
+      </button>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center nopadding">
+    <button
+      mat-raised-button color="primary"
+      [disabled]="getRoleNameField.errors || getPlatformAppField.errors"
+      (click)="onConfirm()"
+    >{{'COMMON.SAVE' | translate}}
+    </button>
+    <button
+      mat-raised-button
+      (click)="onCancel()"
+    >{{'COMMON.CANCEL' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>
+
+

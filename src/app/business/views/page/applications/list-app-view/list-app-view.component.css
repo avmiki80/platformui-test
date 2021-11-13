@@ -1,0 +1,26 @@
+.my-table-cell-name {
+  width: 30%;
+}
+.my-table-cell-url {
+  width: 25%;
+}
+.my-table-cell-description {
+  width: 30%;
+}
+.my-table-cell-operations {
+  width: 15%;
+}
+
+.mat-icon-button{
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.active_button {
+  font-size: 14px;
+  font-weight: bold;
+}
+.inactive_button {
+  font-size: 12px;
+}

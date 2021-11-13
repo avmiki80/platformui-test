@@ -1,0 +1,115 @@
+<mat-card>
+  <mat-card-header>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-3">
+        <button mat-raised-button color="primary" (click)="onClickAddItem()">
+          {{'APP.ADD' | translate}}
+        </button>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="my-input">
+          <mat-label>{{'APP.SEARCH' | translate}}</mat-label>
+          <input matInput
+                 type="text"
+                 autocomplete="off"
+                 placeholder="{{'APP.ENTER-NAME' | translate}}"
+                 #filterInput
+                 [(ngModel)]="searchText"
+                 (keydown.escape)="searchText = ''; onFilter(null)"
+                 (keyup)="onFilter(null)">
+          <button *ngIf="filterInput.value.trim().length > 0"
+                  class="clear-icon"
+                  mat-button matSuffix mat-icon-button aria-label="Сlear"
+                  (click)="searchText = ''; onFilter(null)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div *ngIf="appSearchValues && itemList && itemList.length > 0"
+         class="card-body table-responsive row">
+      <table class="table table-hover" mat-table matSort [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-name"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(name)"
+          >{{'APP.NAME' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-name pointer"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedPlatformApp"
+          >{{item.name | capitalize}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="url">
+          <th class="my-table-header-cell-color" mat-header-cell *matHeaderCellDef>{{'APP.LINK' | translate}}</th>
+          <td mat-cell
+              *matCellDef="let item"
+              class="col-url pointer item"
+              [class.active]="item === selectedPlatformApp"
+              (click)="onClickSelectItem(item)"
+          >
+            <a
+              mat-button
+              [class.active_button]="item === selectedPlatformApp"
+              [class.inactive_button]="item !== selectedPlatformApp"
+              href="{{item.appURL}}"
+              target="_blank"
+            >
+              {{item.appURL}}
+            </a>
+            <!--            <a mat-button-->
+            <!--               [class.active_button]="item === selectedPlatformApp"-->
+            <!--               [class.inactive_button]="item !== selectedPlatformApp"-->
+            <!--               routerLink="{{item.appURL}}">-->
+            <!--              {{item.appURL}}-->
+            <!--            </a>-->
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-description"
+              mat-header-cell *matHeaderCellDef
+          >{{'COMMON.DESCRIPTION' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-description pointer"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedPlatformApp"
+          > {{item.description ? item.description : translateWithoutDescription}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="operation">
+          <th class="my-table-header-cell-color" mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell
+              *matCellDef="let item"
+              class="col-operations"
+              [class.active]="item === selectedPlatformApp"
+          >
+            <button mat-icon-button (click)="onClickEditItem(item)" class="edit-icon">
+              <mat-icon aria-hidden="false">edit</mat-icon>
+            </button>
+            <button class="delete-icon"
+                    mat-icon-button
+                    (click)="onClickDeleteItem(item)" >
+              <mat-icon aria-hidden="false">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row, columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator
+        (page)="pageChanged($event)"
+        [pageIndex]="appSearchValues.pageNumber"
+        [pageSize]="appSearchValues.pageSize"
+        [length]="totalAppsFounded"
+        [pageSizeOptions]="[5, 10]"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,23 @@
+<mat-dialog-content>
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <app-list-role-view
+    [itemList]="roleSet"
+    [roleSearchValues]="roleSearchValues"
+    [totalRolesFounded]="totalRolesFounded"
+    (selectRole)="onSelectRole($event)"
+    (addRole)="onAddRole($event)"
+    (editRole)="onEditRole($event)"
+    (deleteRole)="onDeleteRole($event)"
+    (pagingEvent)="paging($event)"
+  >
+  </app-list-role-view>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center nopadding">
+    <button
+      mat-raised-button
+      (click)="onCancel()"
+    >{{'COMMON.CANCEL' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>

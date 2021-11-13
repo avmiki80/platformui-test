@@ -1,0 +1,85 @@
+<mat-dialog-content [formGroup]="form">
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <mat-form-field>
+    <mat-label>{{'APP.NAME' | translate}}</mat-label>
+    <div class="error" *ngIf="getAppNameField.errors">
+      <p *ngIf="getAppNameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+    </div>
+    <input
+      matInput maxlength="50" required
+      formControlName="appName"
+      id="appName"
+      type="text"
+      placeholder="{{'APP.NAME' | translate}}"
+      [ngClass]="{ 'field-error': getAppNameField.errors }"
+    />
+    <button
+      *ngIf="getAppNameField.value.trim().length > 0"
+      class="clear-icon"
+      mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="getAppNameField.setValue('')"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{'APP.LINK' | translate}}</mat-label>
+    <div class="error" *ngIf="getAppURLField.errors">
+      <p *ngIf="getAppURLField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+    </div>
+    <input
+      id="appURL"
+      type="text"
+      formControlName="appURL"
+      matInput required
+      placeholder="{{'APP.LINK' | translate}}"
+      [ngClass]="{ 'field-error': getAppURLField.errors }"
+    />
+    <button
+      *ngIf="getAppURLField.value.trim().length > 0"
+      class="clear-icon"
+      mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="getAppURLField.setValue('')"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+    <mat-error *ngIf="getAppURLField.errors">
+      <p *ngIf="getAppURLField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{'COMMON.DESCRIPTION' | translate}}</mat-label>
+    <input
+      id="appDescription"
+      type="text"
+      matInput
+      formControlName="appDescription"
+      placeholder="{{'COMMON.DESCRIPTION' | translate}}"
+    />
+    <button
+      *ngIf="getAppDescription && getAppDescription.value.trim().length > 0"
+      class="clear-icon"
+      mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="getAppDescription.setValue('')"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center nopadding">
+    <button
+      mat-raised-button color="primary"
+      [disabled]="getAppNameField.errors || getAppURLField.errors"
+      (click)="onConfirm()"
+    >{{'COMMON.SAVE' | translate}}
+    </button>
+    <button
+      mat-raised-button
+      (click)="onCancel()"
+    >{{'COMMON.CANCEL' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>
+

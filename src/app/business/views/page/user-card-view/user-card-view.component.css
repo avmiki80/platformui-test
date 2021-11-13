@@ -1,0 +1,13 @@
+.card {
+  font-size: 20px;
+  font-style: italic;
+  padding: 10px;
+}
+.card span{
+  font-style: normal;
+  font-weight: bold;
+}
+
+.mat-card-actions {
+  margin-left: 10px!important;
+}

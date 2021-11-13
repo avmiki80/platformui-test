@@ -1,0 +1,57 @@
+<div *ngIf="isShow">
+  <mat-tab-group dynamicHeight (click)="onTabClick()">
+    <mat-tab label="{{'USER.USERS' | translate}}">
+      <div class="row">
+        <app-tree-unit-view
+          [unitTree]="unitTree"
+          (addUnit)="onAddUnit($event)"
+          (editUnit)="onEditUnit($event)"
+          (deleteUnit)="onDeleteUnit($event)"
+          (selectUnit)="onSelectUnit($event)"
+          class="col-3"
+        ></app-tree-unit-view>
+        <app-list-user-view
+          [itemList]="unitUserList"
+          [totalUsersFounded]="totalUsersFounded"
+          [userSearchValues]="userSearchValues"
+          [onlyView]=false
+          [wildUsersView]=false
+          [unit]="selectUnit"
+          [selectedUser]="selectUser"
+          (selectUser)="onSelectPlatformUser($event)"
+          (addUser)="onAddPlatformUser($event)"
+          (editUser)="onEditPlatformUser($event)"
+          (deleteUser)="onDeletePlatformUser($event)"
+          (pagingEvent)="pagingUsers($event)"
+          (filter)="onSearchUser($event)"
+          class="col-5"
+        >
+        </app-list-user-view>
+        <app-simple-list-role-view class="col-4"
+                                   [onlyView]=true
+                                   [roleSet]="roleSet"
+        >
+        </app-simple-list-role-view>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{'USER.WILD-USERS' | translate}}">
+      <div class="row">
+        <app-list-user-view
+          [itemList]="wildUserList"
+          [userSearchValues]="wildUserSearchValues"
+          [totalUsersFounded]="totalWildUsersFounded"
+          [onlyView]=false
+          [wildUsersView]=true
+          (selectUser)="onSelectPlatformUser($event)"
+          (refreshUsers)="onRefreshWildUserList()"
+          (editUser)="onEditPlatformUser($event)"
+          (deleteUser)="onDeletePlatformUser($event)"
+          (pagingEvent)="pagingWildUsers($event)"
+          class="col-7"
+        >
+        </app-list-user-view>
+
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,29 @@
+<div class="container-fluid settings">
+  <button mat-icon-button type="button" (click)="onToggleMenu()" class="nomargin">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="col-3 text-right align-self-top nopadding action-bar">
+    <div class="action-bar-item">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <p class="text-center padding-25 account" *ngIf="user">
+          {{user.username}}
+        </p>
+        <button mat-menu-item (click)="showSettings()">
+          <mat-icon>settings</mat-icon>
+          <span>{{'COMMON.SETTINGS' | translate}}</span>
+        </button>
+        <button mat-menu-item *ngIf="!isMobile" class="header-icon">
+          <mat-icon>help</mat-icon>
+          <span>{{'COMMON.HELP' | translate}}</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>login</mat-icon>
+          <span>{{'COMMON.EXIT' | translate}}</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</div>

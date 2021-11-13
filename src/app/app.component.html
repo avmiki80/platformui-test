@@ -1,0 +1,4 @@
+<div class="container-fluid">
+  <p *ngIf="!cookieEnabled">Cookie отключены. Включите Cookie и перезагрузите страницу.</p>
+  <router-outlet *ngIf="cookieEnabled"></router-outlet>
+</div>

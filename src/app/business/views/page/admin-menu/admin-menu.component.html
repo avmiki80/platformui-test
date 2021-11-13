@@ -1,0 +1,30 @@
+<div id="menu-items">
+  <div class="logo">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2">
+          <button mat-icon-button (click)="onShowLeftMenu()">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sidebar-wrapper">
+    <ul class="nav">
+<!--            список menuItems-->
+      <li
+        *ngFor="let item of menuItemList, let index = index"
+        class="nav-item item"
+        [class.active-link]="selectedItem === item"
+        (click)="onSelectItem(item)"
+      >
+        <a class="nav-link" (click)="onSelectItem(item)">
+          <!--          название item-->
+          <span class="item-title">{{item}}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="sidebar-background" *ngIf="!isMobile"></div>
+</div>

@@ -1,0 +1,24 @@
+<!--диалоговое окно настроек приложения-->
+<div mat-dialog-content>
+  <mat-label>{{'LANG.SELECT' | translate}}</mat-label>
+  <mat-radio-group
+    class="radio-group"
+    [(ngModel)]="lang"
+    (ngModelChange)="langChanged()"
+  >
+    <mat-radio-button value="{{en}}">
+      {{'LANG.EN' | translate}}
+    </mat-radio-button>
+
+    <mat-radio-button value="{{ru}}">
+      {{'LANG.RU' | translate}}
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+<!--  кнопки возможных действий-->
+<div mat-dialog-actions>
+
+  <button mat-raised-button color="primary" (click)="close()">{{'COMMON.CLOSE' | translate}}</button>
+
+
+</div>

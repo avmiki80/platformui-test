@@ -1,0 +1,244 @@
+<div class="page-wrapper bg-gra-02 font-poppins p-t-130 p-b-100">
+  <div class="container wrapper wrapper--w680">
+    <div class="card card-4">
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="submitForm()" [appMustMatch]="['password', 'confirmPassword']">
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <label>Аккаунт</label>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div *ngIf="firstSubmitted && usernameField.errors">
+                <p *ngIf="usernameField.errors.required" class="error">Обязательное поле</p>
+              </div>
+            </div>
+          </div>
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <input
+                  id="username"
+                  type="text"
+                  formControlName="username"
+                  class="input--style-4"
+                  [ngClass]="{ 'field-error': firstSubmitted && usernameField.errors }"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <p class="desc">Имя аккаунта на любом языке (как к вам обращаться)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <label>{{'USER.LASTNAME' | translate}}</label>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div *ngIf="firstSubmitted && lastnameField.errors">
+                <p *ngIf="lastnameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <input
+                  id="lastname"
+                  type="text"
+                  formControlName="lastname"
+                  class="input--style-4"
+                  [ngClass]="{ 'field-error': firstSubmitted && lastnameField.errors }"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <p class="desc">{{'USER.LASTNAME' | translate}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <label>{{'USER.FIRSTNAME' | translate}}</label>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div *ngIf="firstSubmitted && firstnameField.errors">
+                <p *ngIf="firstnameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <input
+                  id="firstname"
+                  type="text"
+                  formControlName="firstname"
+                  class="input--style-4"
+                  [ngClass]="{ 'field-error': firstSubmitted && firstnameField.errors }"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <p class="desc">{{'USER.FIRSTNAME' | translate}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <label>{{'USER.PATRONYMICNAME' | translate}}</label>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div *ngIf="firstSubmitted && patronymicnameField.errors">
+                <p *ngIf="patronymicnameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <input
+                  id="patronymicname"
+                  type="text"
+                  formControlName="patronymicname"
+                  class="input--style-4"
+                  [ngClass]="{ 'field-error': firstSubmitted && patronymicnameField.errors }"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <p class="desc">{{'USER.PATRONYMICNAME' | translate}}</p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <label>Email</label>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div *ngIf="firstSubmitted && emailField.errors">
+                <p *ngIf="emailField.errors.required" class="error">Обязательное поле</p>
+                <p *ngIf="emailField.errors.email" class="error">Неверный email</p>
+              </div>
+            </div>
+          </div>
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <input
+                  id="email"
+                  type="email"
+                  formControlName="email"
+                  class="input--style-4"
+                  [ngClass]="{ 'field-error': firstSubmitted && emailField.errors }"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <p class="desc">На эту почту придет письмо для подтверждения регистрации</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <label>Пароль</label>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div *ngIf="firstSubmitted && passwordField.errors">
+                <p *ngIf="passwordField.errors.required" class="error">Обязательное поле</p>
+                <p *ngIf="passwordField.errors.minlength" class="error">Не меньше 4 символов</p>
+              </div>
+            </div>
+          </div>
+          <div class="row  row-space">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <input
+                  id="password"
+                  type="password"
+                  formControlName="password"
+                  [readOnly]="isLoading"
+                  class="input--style-4"
+                  [ngClass]="{ 'field-error': firstSubmitted && passwordField.errors}"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <p class="desc">Используйте буквы разного регистра и любые символы</p>
+              </div>
+            </div>
+          </div>
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <label>Повторно пароль</label>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div *ngIf="firstSubmitted && confirmPasswordField.errors">
+                <p *ngIf="confirmPasswordField.errors.required" class="error">Обязательное поле</p>
+                <p *ngIf="confirmPasswordField.errors.minlength" class="error">Не меньше 4 символов</p>
+                <p *ngIf="confirmPasswordField.errors.mustMatch" class="error">Пароли не совпадают</p>
+              </div>
+            </div>
+          </div>
+          <div class="row  row-space">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  formControlName="confirmPassword"
+                  [readOnly]="isLoading"
+                  class="input--style-4"
+                  [ngClass]="{ 'field-error': firstSubmitted && confirmPasswordField.errors}"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group">
+                <p class="desc">Подтвердите пароль (чтобы избежать ошибок)</p>
+              </div>
+            </div>
+          </div>
+          <div class="row row-space">
+            <div class="col-md-6 col-sm-12">
+              <button
+                type="submit"
+                class="btn btn--radius-2 btn--blue"
+                [disabled]="isLoading"
+                [ngClass]="{'disabled-button': isLoading}"
+              >
+                Регистрация
+              </button>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <img src="assets/img/loading.gif" class="loading" *ngIf="isLoading">
+              <div *ngIf="err && !isLoading">
+                <p class="error">{{err}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row row-space cancel-region">
+            <div class="col-md-12">
+              <a routerLink="/login" class="routerLink" [class.disabled]="isLoading ? true: null">
+                Вход в систему
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

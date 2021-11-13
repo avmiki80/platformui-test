@@ -1,0 +1,64 @@
+<div class="row" *ngIf="user">
+  <div class="col-4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{'USER.FIO' | translate}}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="card">
+          <span>{{'USER.LASTNAME' | translate}}</span>&nbsp;{{user.lastName | capitalize}}
+        </div>
+        <div class="card">
+          <span>{{'USER.FIRSTNAME' | translate}}</span>&nbsp;{{user.firstName | capitalize}}
+        </div>
+        <div class="card">
+          <span>{{'USER.PATRONYMICNAME' | translate}}</span>&nbsp;{{user.patronymicName | capitalize}}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{'USER.REG-DATA' | translate}}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="card">
+          <span>{{'USER.NAME' | translate}}</span>&nbsp;{{user.username | capitalize}}
+        </div>
+        <div class="card">
+          <span>{{'USER.EMAIL' | translate}}</span>&nbsp;{{user.email}}
+        </div>
+      </mat-card-content>
+      <div class="card">
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onChangePassword()"
+          >
+            {{'USER.CHANGE-PASSWORD' | translate}}
+          </button>
+        </mat-card-actions>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{'USER.RIGHTS' | translate}}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="card">
+          <span *ngFor="let role of user.roleSet">{{role.viewName}}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

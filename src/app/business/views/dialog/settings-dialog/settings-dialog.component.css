@@ -1,0 +1,20 @@
+.settings-title {
+  line-height: 25px;
+}
+
+.vertical-middle {
+  vertical-align: middle;
+}
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.radio-button {
+  margin: 5px;
+}
+
+.mat-radio-label-content {
+  color: rgba(29, 29, 29, 0.93);
+}

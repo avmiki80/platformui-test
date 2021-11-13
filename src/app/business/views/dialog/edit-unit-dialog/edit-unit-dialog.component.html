@@ -1,0 +1,96 @@
+<mat-dialog-content [formGroup]="form">
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <div class="row">
+    <mat-form-field class="col-9">
+      <mat-label>{{'UNIT.NAME' | translate}}</mat-label>
+      <div class="error" *ngIf="getNameField.errors">
+        <p *ngIf="getNameField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+      </div>
+      <input
+        matInput maxlength="50" required
+        formControlName="name"
+        id="name"
+        type="text"
+        placeholder="{{'UNIT.NAME' | translate}}"
+        [ngClass]="{ 'field-error': getNameField.errors }"
+      />
+      <button
+        *ngIf="getNameField.value.trim().length > 0"
+        class="clear-icon"
+        mat-button matSuffix mat-icon-button aria-label="Clear"
+        (click)="getNameField.setValue('')"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="col-9">
+      <mat-label>{{'UNIT.PARENT' | translate}}</mat-label>
+      <div class="error" *ngIf="getParentField.errors">
+        <p *ngIf="getParentField.errors.required" class="error">{{'COMMON.REQUIRED-FIELD' | translate}}</p>
+      </div>
+      <input
+        id="parent"
+        type="text"
+        readonly
+        formControlName="parent"
+        matInput
+        placeholder="{{'UNIT.PARENT' | translate}}"
+        [ngClass]="{ 'field-error': getParentField.errors }"
+      />
+      <button
+        *ngIf="getParentField.value.trim().length > 0"
+        class="clear-icon"
+        mat-button matSuffix mat-icon-button aria-label="Clear"
+        (click)="onSetParentUnit()"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  <!--  </div>-->
+    <div class="col-3 align-self-end">
+      <button
+        mat-raised-button
+        (click)="onSetParentUnit()"
+        class="add-btn red"
+      >{{'UNIT.SET-PARENT' | translate}}
+      </button>
+    </div>
+  </div>
+  <mat-form-field>
+    <mat-label>{{'COMMON.DESCRIPTION' | translate}}</mat-label>
+    <input
+      id="description"
+      type="text"
+      matInput
+      formControlName="description"
+      placeholder="{{'COMMON.DESCRIPTION' | translate}}"
+    />
+    <button
+      *ngIf="getDescription && getDescription.value.trim().length > 0"
+      class="clear-icon"
+      mat-button matSuffix mat-icon-button aria-label="Clear"
+      (click)="getDescription.setValue('')"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center nopadding">
+    <button
+      mat-raised-button color="primary"
+      [disabled]="getNameField.errors"
+      (click)="onConfirm()"
+    >{{'COMMON.SAVE' | translate}}
+    </button>
+    <button
+      mat-raised-button
+      (click)="onCancel()"
+    >{{'COMMON.CANCEL' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>
+
+

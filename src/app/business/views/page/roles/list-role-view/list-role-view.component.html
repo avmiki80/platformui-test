@@ -1,0 +1,130 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title *ngIf="onlyView">
+      {{'APP.INFO' | translate}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row" *ngIf="!onlyView">
+      <div class="col-3">
+        <button mat-raised-button color="primary" (click)="onClickAddItem()">
+          {{'ROLE.ADD' | translate}}
+        </button>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="my-input">
+          <mat-label>{{'ROLE.SEARCH-NAME' | translate}}</mat-label>
+          <input matInput
+                 type="text"
+                 autocomplete="off"
+                 placeholder="{{'ROLE.ENTER-NAME' | translate}}"
+                 #filterInputName
+                 [(ngModel)]="searchName"
+                 (keydown.escape)="searchName = ''; onFilter(null)"
+                 (keyup)="onFilter(null)">
+          <button *ngIf="filterInputName.value.trim().length > 0"
+                  class="clear-icon"
+                  mat-button matSuffix mat-icon-button aria-label="Сlear"
+                  (click)="searchName = ''; onFilter(null)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="my-input">
+          <mat-label>{{'ROLE.SEARCH-NAME-FOR-USER' | translate}}</mat-label>
+          <input matInput
+                 type="text"
+                 autocomplete="off"
+                 placeholder="{{'ROLE.ENTER-NAME-FOR-USER' | translate}}"
+                 #filterInputViewName
+                 [(ngModel)]="searchViewName"
+                 (keydown.escape)="searchViewName = ''; onFilter(null)"
+                 (keyup)="onFilter(null)">
+          <button *ngIf="filterInputViewName.value.trim().length > 0"
+                  class="clear-icon"
+                  mat-button matSuffix mat-icon-button aria-label="Сlear"
+                  (click)="searchViewName = ''; onFilter(null)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div *ngIf="itemList && itemList.length > 0 && roleSearchValues"
+         class="card-body table-responsive row">
+      <table class="table table-hover" mat-table matSort [dataSource]="dataSource">
+
+        <ng-container matColumnDef="name">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-name"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(name)"
+          >{{'ROLE.NAME' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-name pointer"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedRole"
+          >{{item.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="viewname">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-viewname"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(viewName)"
+          >{{'ROLE.NAME-FOR-USER' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-viewname pointer"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedRole"
+          >{{item.viewName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description" *ngIf="!onlyView">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-description"
+              mat-header-cell *matHeaderCellDef
+          >{{'COMMON.DESCRIPTION' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-description pointer"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedRole"
+          > {{item.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="operation" *ngIf="!onlyView">
+          <th class="my-table-header-cell-color my-table-cell-operations"
+              mat-header-cell *matHeaderCellDef></th>
+          <td class="my-table-cell-operations"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedRole">
+            <button class="edit-icon"
+                    mat-icon-button
+                    (click)="onClickEditItem(item)" >
+              <mat-icon aria-hidden="false">edit</mat-icon>
+            </button>
+            <button class="delete-icon"
+                    mat-icon-button
+                    (click)="onClickDeleteItem(item)" >
+              <mat-icon aria-hidden="false">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row, columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator
+        (page)="pageChanged($event)"
+        [pageIndex]="roleSearchValues.pageNumber"
+        [pageSize]="roleSearchValues.pageSize"
+        [length]="totalRolesFounded"
+        [pageSizeOptions]="[5, 10]"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+    </div>
+
+  </mat-card-content>
+</mat-card>

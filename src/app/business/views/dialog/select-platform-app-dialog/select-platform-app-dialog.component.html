@@ -1,0 +1,24 @@
+<mat-dialog-content>
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <app-list-app-view
+    [itemList]="platformAppSet"
+    [totalAppsFounded]="totalAppsFounded"
+    [appSearchValues]="appSearchValues"
+    (selectPlatformApp)="onSelectPlatformApp($event)"
+    (addPlatformApp)="onAddPlatformApp($event)"
+    (editPlatformApp)="onEditPlatformApp($event)"
+    (deletePlatformApp)="onDeletePlatformApp($event)"
+    (filterByName)="onFilter($event)"
+    (pagingEvent)="paging($event)"
+  >
+  </app-list-app-view>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center nopadding">
+    <button
+      mat-raised-button
+      (click)="onCancel()"
+    >{{'COMMON.CANCEL' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>
